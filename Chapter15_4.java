@@ -20,15 +20,12 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
-import javafx.scene.text.*;
 import javafx.stage.Stage;
 import javafx.util.*;
 
 
 public class Chapter15_4 extends Application {
 
-    // INSTANCE VARIABLE(s) declaration(s)
-    private Timeline animation;
 
     public static void main(String[] args) {
 
@@ -53,23 +50,41 @@ public class Chapter15_4 extends Application {
         circle1.setFill(Color.rgb(255, 0, 255, 1.0));
         circle2.setFill(Color.PINK);
 
+        // Add the Circles to the Pane
+        pane.getChildren().addAll(rectangle, circle1, circle2);
+
         // Create the two PathTransition objects
         PathTransition pt1 = new PathTransition();
         PathTransition pt2 = new PathTransition();
 
-        // Add the Circles to the Pane
-        pane.getChildren().addAll(rectangle, circle1, circle2);
+        // Set the Duration (speed) of the PathTransition objects
+        pt1.setDuration(Duration.millis(1000));
+        pt2.setDuration(Duration.millis(2000));
+
+        // Set the Circles as Nodes
+        pt1.setNode(circle1);
+        pt2.setNode(circle2);
+
+        // Set the path of the Circle PathTransition objects
+        pt1.setPath(rectangle);
+        pt2.setPath(rectangle);
+
+        // Set the Duration of the animation to INDEFINITE (play forever until the program is ended)
+        pt1.setCycleCount(Timeline.INDEFINITE);
+        pt2.setCycleCount(Timeline.INDEFINITE);
+
+        // Set AutoReverse to False, so the PathTransition objects stay going in the same direction
+        pt1.setAutoReverse(false);
+        pt2.setAutoReverse(false);
+
+        // Start (play) both PathTransition objects
+        pt1.play();
+        pt2.play();
 
         // Create the Scene with the Pane, Set the Title of the Stage, Set the Scene to the Stage, Show the Stage
         Scene scene = new Scene(pane, 500, 500);
-        primaryStage.setTitle("Chapter 15, Problem 4: Multiply PathTransitions");
+        primaryStage.setTitle("Chapter 15, Problem 4: Multiple PathTransition Objects");
         primaryStage.setScene(scene);
         primaryStage.show();
-    }
-
-
-    public void play(){
-
-        animation.play();
     }
 }
