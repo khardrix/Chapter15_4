@@ -41,13 +41,30 @@ public class Chapter15_4 extends Application {
         // Create the Pane
         Pane pane = new Pane();
 
-        // Create the Circle object and set its Color to purple (255[red], 0[green], 255[blue], 100% Opacity)
-        Circle circle = new Circle(250, 250, 50);
-        circle.setFill(Color.rgb(255, 0, 255, 1.0));
+        // Create the Rectangle for the Circles to travel around as a Path,
+            // Set the border to black and the Fill to white
+        Rectangle rectangle = new Rectangle(75,75,350,350);
+        rectangle.setStroke(Color.BLACK);
+        rectangle.setFill(Color.WHITE);
+
+        // Create the Circle objects and set one Color to purple and the other Color to pink
+        Circle circle1 = new Circle(75,75,50);
+        Circle circle2 = new Circle(425,425,50);
+        circle1.setFill(Color.rgb(255, 0, 255, 1.0));
+        circle2.setFill(Color.PINK);
 
         // Create the two PathTransition objects
         PathTransition pt1 = new PathTransition();
         PathTransition pt2 = new PathTransition();
+
+        // Add the Circles to the Pane
+        pane.getChildren().addAll(rectangle, circle1, circle2);
+
+        // Create the Scene with the Pane, Set the Title of the Stage, Set the Scene to the Stage, Show the Stage
+        Scene scene = new Scene(pane, 500, 500);
+        primaryStage.setTitle("Chapter 15, Problem 4: Multiply PathTransitions");
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
 
